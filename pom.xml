@@ -6,7 +6,7 @@
     <groupId>com.example</groupId>
     <artifactId>supersetBI</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Superset BI Project</name>
     <description>Project to package and push ZIP files to Nexus</description>
@@ -20,7 +20,7 @@
                 <version>3.3.0</version>
                 <configuration>
                     <descriptors>
-                        <descriptor>src/assembly/zip.xml</descriptor>
+                        <descriptor>zip.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
