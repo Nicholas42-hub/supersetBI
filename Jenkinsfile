@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         GITHUB_REPO = 'https://github.com/Nicholas42-hub/supersetBI.git'
-        BRANCH = 'main' // Replace with the branch you want to use
-        NEXUS_REPO = 'http://localhost:8081/repository/superset/' // Updated Nexus repository URL
-        NEXUS_CREDENTIALS_ID = 'nexus3' // Use the credential ID 'nexus3'
+        BRANCH = 'main'
+        NEXUS_REPO = 'http://localhost:8081/repository/superset/'
+        NEXUS_CREDENTIALS_ID = 'nexus3'
     }
 
     stages {
@@ -15,22 +15,16 @@ pipeline {
             }
         }
 
-        stage('Build with Maven') {
+        stage('Build and Package with Maven') {
             steps {
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Zip Artifacts') {
-            steps {
-                sh 'zip -r artifact.zip *' // Zips all files in the current directory
+                sh 'mvn clean package'
             }
         }
 
         stage('Push to Nexus') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_USER')]) {
-                    sh "curl -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file artifact.zip ${NEXUS_REPO}artifact.zip"
+                    sh "curl -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file target/supersetBI-1.0.0-zip-assembly.zip ${NEXUS_REPO}supersetBI-1.0.0.zip"
                 }
             }
         }
