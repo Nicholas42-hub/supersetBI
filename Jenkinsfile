@@ -6,7 +6,7 @@ pipeline {
         BRANCH = 'main'
         NEXUS_REPO = 'http://nexus:8081/repository/superset/'
         NEXUS_CREDENTIALS_ID = 'nexus3'
-        ARTIFACT_VERSION = '1.0.0-SNAPSHOT'  // Updated to match your working command
+        ARTIFACT_VERSION = '1.0.0-SNAPSHOT'  // This remains the same
     }
 
     stages {
@@ -26,8 +26,9 @@ pipeline {
             steps {
                 script {
                     def artifactPath = "com/example/supersetBI/${ARTIFACT_VERSION}/supersetBI-${ARTIFACT_VERSION}.zip"
+                    def localArtifact = "target/supersetBI-1.0.0-zip-assembly.zip" // Corrected filename
                     withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_USER')]) {
-                        sh "curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file target/supersetBI-${ARTIFACT_VERSION}-zip-assembly.zip ${NEXUS_REPO}${artifactPath}"
+                        sh "curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file ${localArtifact} ${NEXUS_REPO}${artifactPath}"
                     }
                 }
             }
