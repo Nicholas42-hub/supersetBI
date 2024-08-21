@@ -4,7 +4,7 @@ pipeline {
     environment {
         GITHUB_REPO = 'https://github.com/Nicholas42-hub/supersetBI.git'
         BRANCH = 'main'
-        NEXUS_REPO = 'http://localhost:8081/repository/superset/'
+        NEXUS_REPO = 'http://nexus:8081/repository/superset/'
         NEXUS_CREDENTIALS_ID = 'nexus3'
     }
 
