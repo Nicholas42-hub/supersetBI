@@ -6,13 +6,29 @@ pipeline {
         BRANCH = 'main'
         NEXUS_REPO = 'http://nexus:8081/repository/superset/'
         NEXUS_CREDENTIALS_ID = 'nexus3'
-        ARTIFACT_VERSION = '1.0.0-SNAPSHOT'  // This remains the same
+        ARTIFACT_VERSION = '1.0.0-SNAPSHOT'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
                 git branch: "${BRANCH}", url: "${GITHUB_REPO}"
+            }
+        }
+
+        stage('Prepare Copies with Different metadata.yaml') {
+            steps {
+                script {
+                    // Copy original folder to create three different versions
+                    sh 'cp -r dashboard_export_20240724T154058 dashboard_export_dashboard'
+                    sh 'cp -r dashboard_export_20240724T154058 dashboard_export_sql'
+                    sh 'cp -r dashboard_export_20240724T154058 dashboard_export_charts'
+
+                    // Modify metadata.yaml for each version
+                    sh "sed -i 's/type:.*/type: Dashboard/' dashboard_export_dashboard/metadata.yaml"
+                    sh "sed -i 's/type:.*/type: sql/' dashboard_export_sql/metadata.yaml"
+                    sh "sed -i 's/type:.*/type: charts/' dashboard_export_charts/metadata.yaml"
+                }
             }
         }
 
