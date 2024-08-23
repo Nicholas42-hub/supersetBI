@@ -1,0 +1,13 @@
+database_name: MySQL
+sqlalchemy_uri: mysql+mysqldb://root:XXXXXXXXXX@172.20.10.3:3306/lagardere
+cache_timeout: null
+expose_in_sqllab: true
+allow_run_async: false
+allow_ctas: false
+allow_cvas: false
+allow_dml: false
+allow_file_upload: false
+extra:
+  allows_virtual_table_explore: true
+uuid: 22c7496d-3257-430d-b975-046be0d0a9af
+version: 1.0.0

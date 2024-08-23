@@ -1,0 +1,62 @@
+dashboard_title: test
+description: null
+css: null
+slug: null
+certified_by: null
+certification_details: null
+published: false
+uuid: ae4c0c9a-667d-4e32-9675-595d5ed8f516
+position:
+  DASHBOARD_VERSION_KEY: v2
+  ROOT_ID:
+    children:
+    - GRID_ID
+    id: ROOT_ID
+    type: ROOT
+  GRID_ID:
+    children:
+    - ROW-N-82HNDS1E
+    id: GRID_ID
+    parents:
+    - ROOT_ID
+    type: GRID
+  HEADER_ID:
+    id: HEADER_ID
+    meta:
+      text: test
+    type: HEADER
+  ROW-N-82HNDS1E:
+    children:
+    - CHART-SHGERSC5
+    id: ROW-N-82HNDS1E
+    meta:
+      '0': ROOT_ID
+      background: BACKGROUND_TRANSPARENT
+    type: ROW
+    parents:
+    - ROOT_ID
+    - GRID_ID
+  CHART-SHGERSC5:
+    children: []
+    id: CHART-SHGERSC5
+    meta:
+      chartId: 2
+      height: 50
+      sliceName: test
+      uuid: 49ebd0da-fa59-4101-b2ae-2f3c5537c2c2
+      width: 4
+    type: CHART
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-N-82HNDS1E
+metadata:
+  shared_label_colors: {}
+  color_scheme_domain: []
+  timed_refresh_immune_slices: []
+  expanded_slices: {}
+  refresh_frequency: 0
+  color_scheme: ''
+  label_colors: {}
+  cross_filters_enabled: true
+version: 1.0.0
