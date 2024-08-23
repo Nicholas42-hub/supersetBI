@@ -7,12 +7,58 @@
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
+
+        <!-- Copy 1: Dashboard -->
         <fileSet>
-            <directory>${project.basedir}</directory>
+            <directory>dashboard_export_20240724T154058</directory>
+            <outputDirectory>dashboard_export_dashboard</outputDirectory>
             <includes>
-                <include>*.zip</include>
+                <include>**/*</include>
             </includes>
-            <outputDirectory>/</outputDirectory>
+            <fileMode>0644</fileMode>
         </fileSet>
+
+        <!-- Copy 2: SQL -->
+        <fileSet>
+            <directory>dashboard_export_20240724T154058</directory>
+            <outputDirectory>dashboard_export_sql</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>0644</fileMode>
+            <filters>
+                <filter>
+                    <target>dashboard_export_sql/metadata.yaml</target>
+                    <replacements>
+                        <replacement>
+                            <token>type:.*</token>
+                            <value>type: sql</value>
+                        </replacement>
+                    </replacements>
+                </filter>
+            </filters>
+        </fileSet>
+
+        <!-- Copy 3: Charts -->
+        <fileSet>
+            <directory>dashboard_export_20240724T154058</directory>
+            <outputDirectory>dashboard_export_charts</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>0644</fileMode>
+            <filters>
+                <filter>
+                    <target>dashboard_export_charts/metadata.yaml</target>
+                    <replacements>
+                        <replacement>
+                            <token>type:.*</token>
+                            <value>type: charts</value>
+                        </replacement>
+                    </replacements>
+                </filter>
+            </filters>
+        </fileSet>
+
     </fileSets>
 </assembly>
